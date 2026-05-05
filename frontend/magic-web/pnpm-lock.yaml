@@ -10,6 +10,9 @@ overrides:
   marked: 15.0.12
 
 patchedDependencies:
+  '@dtyq/magic-admin':
+    hash: f1c6224dcacd1d0de3873021ae264702c330e50768e6f40eeae26817ea0f6977
+    path: patches/@dtyq__magic-admin.patch
   pptxgenjs:
     hash: 7248d5ba47748c8fd73ce32aa90a0456c6636f6e387aee6823e45f1dc7ab8228
     path: patches/pptxgenjs.patch
@@ -49,8 +52,8 @@ importers:
         specifier: ~0.0.4
         version: 0.0.4
       '@dtyq/magic-admin':
-        specifier: ^0.1.8
-        version: 0.1.8(40e20a8d740069c5497097c796e442d4)
+        specifier: ^0.1.12
+        version: 0.1.14(patch_hash=f1c6224dcacd1d0de3873021ae264702c330e50768e6f40eeae26817ea0f6977)(40e20a8d740069c5497097c796e442d4)
       '@dtyq/magic-flow':
         specifier: 0.0.13
         version: 0.0.13(@babel/core@7.29.0)(@types/react@18.3.28)(date-fns@4.1.0)(luxon@3.7.2)(moment@2.30.1)(monaco-editor@0.48.0)(react-is@18.3.1)
@@ -2235,8 +2238,8 @@ packages:
       typescript:
         optional: true
 
-  '@dtyq/magic-admin@0.1.8':
-    resolution: {integrity: sha512-eSsysAUDurQj3jJBv9ObU/CRNZlUs+h8ukgbYlQljCa9B+mNZu6cn1nheNWtMGQ+VnW5esTcLBK787MgP42znw==}
+  '@dtyq/magic-admin@0.1.14':
+    resolution: {integrity: sha512-S96tIROLMsX0sMBfpvw7EJAibxxzrAlploXPnB4Vl8EL4ZrA0JB2N2GqfEuQw/IMD02CUQDYRdJKflbiZad6RQ==}
     engines: {node: '>=20.0.0', pnpm: '>=9.0.0'}
     peerDependencies:
       '@dnd-kit/core': '>= 6.0.0'
@@ -6043,6 +6046,7 @@ packages:
   '@xmldom/xmldom@0.9.8':
     resolution: {integrity: sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@zumer/snapdom@2.5.0':
     resolution: {integrity: sha512-cjk1VTc6D/tRWHdvm/UwzetR7FSxDobYJ7Db1b5uuLhVTU0br8Y8hJJ1+TzArJni4BRvHgU60Q0MR+RKhRqyDg==}
@@ -6495,6 +6499,7 @@ packages:
   basic-ftp@5.2.0:
     resolution: {integrity: sha512-VoMINM2rqJwJgfdHq6RiUudKt2BV+FY5ZFezP/ypmwayk68+NzzAQy4XXLlqsGD4MCzq3DrmNFD/uUmBJuGoXw==}
     engines: {node: '>=10.0.0'}
+    deprecated: Security vulnerability fixed in 5.2.1, please upgrade
 
   big-integer@1.6.52:
     resolution: {integrity: sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==}
@@ -13364,6 +13369,7 @@ packages:
 
   uuid@10.0.0:
     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@11.1.0:
@@ -13376,10 +13382,12 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   uvu@0.5.6:
@@ -15782,7 +15790,7 @@ snapshots:
       - eslint-plugin-import-x
       - supports-color
 
-  '@dtyq/magic-admin@0.1.8(40e20a8d740069c5497097c796e442d4)':
+  '@dtyq/magic-admin@0.1.14(patch_hash=f1c6224dcacd1d0de3873021ae264702c330e50768e6f40eeae26817ea0f6977)(40e20a8d740069c5497097c796e442d4)':
     dependencies:
       '@tabler/icons-react': 3.40.0(react@18.3.1)
       ahooks: 3.9.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -26979,7 +26987,7 @@ snapshots:
       lodash: 4.17.23
       postcss: 7.0.39
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0)(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-less@6.0.0(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39):
     dependencies:
       postcss: 7.0.39
     optionalDependencies:
@@ -29741,7 +29749,7 @@ snapshots:
       postcss-sass: 0.3.5
       postcss-scss: 2.1.1
       postcss-selector-parser: 3.1.2
-      postcss-syntax: 0.36.2(postcss-html@0.36.0)(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-html@0.36.0(postcss-syntax@0.36.2(postcss-html@1.8.1)(postcss-less@6.0.0(postcss@8.5.8))(postcss@8.5.8))(postcss@7.0.39))(postcss-jsx@0.36.4)(postcss-less@3.1.4)(postcss-markdown@0.36.0)(postcss-scss@2.1.1)(postcss@7.0.39)
       postcss-value-parser: 3.3.1
       resolve-from: 4.0.0
       signal-exit: 3.0.7
