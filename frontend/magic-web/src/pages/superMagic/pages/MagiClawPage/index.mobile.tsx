@@ -76,6 +76,7 @@ export default function MagiClawMobilePage() {
 		try {
 			const created = await MagicClawApi.createMagicClaw({
 				name,
+				template_code: "openclaw",
 				...(icon ? { icon } : {}),
 			})
 			const projectId = created.extra?.project?.id

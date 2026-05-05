@@ -40,6 +40,7 @@ export interface CreateMagicClawBody {
 	name: string
 	description?: string | null
 	icon?: string | null
+	template_code: "openclaw" | "magishock"
 }
 
 export interface UpdateMagicClawBody {
