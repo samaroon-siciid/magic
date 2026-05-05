@@ -107,13 +107,31 @@ enum ProviderCode: string
                     ]
                 };
             case GoogleProviderConfigItem::class:
+                /** @var GoogleProviderConfigItem $config */
+                $serviceAccount = $config->toOdinServiceAccountConfig();
+                $isServiceAccountMode = $config->getAuthType() === GoogleProviderConfigItem::AUTH_TYPE_SERVICE_ACCOUNT
+                    && $serviceAccount !== null;
+
+                $apiKey = $config->getApiKey();
+                if ($isServiceAccountMode && $apiKey === '') {
+                    // Vertex AI authenticates via the service account JSON, but Odin's
+                    // Gemini provider still rejects an empty api_key string when
+                    // skip_api_key_validation is not honored. A non-secret placeholder
+                    // satisfies that legacy check while real auth flows through
+                    // service_account.
+                    $apiKey = 'service-account-auth';
+                }
+
                 return [
-                    'api_key' => $config->getApiKey(),
+                    'api_key' => $apiKey,
                     'base_url' => $config->getUrl(),
                     'auto_cache_config' => [
                         'enable_cache' => config('llm.gemini_auto_cache', true),
                     ],
-                    'service_account' => $config->toOdinServiceAccountConfig(),
+                    'service_account' => $serviceAccount,
+                    // Tell Odin to skip api_key validation in service-account mode so
+                    // Vertex AI requests are not rejected with [Gemini] api_key empty.
+                    'skip_api_key_validation' => $isServiceAccountMode,
                 ];
             default:
                 return [
