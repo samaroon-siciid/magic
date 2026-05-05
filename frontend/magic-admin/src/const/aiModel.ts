@@ -83,7 +83,7 @@ export namespace AiModel {
 		[ServiceProvider.BigModel]: "https://open.bigmodel.cn/api/paas/v4",
 		[ServiceProvider.MiniMax]: "https://api.minimaxi.com/v1",
 		[ServiceProvider.SiliconFlow]: "https://api.siliconflow.cn/v1",
-		[ServiceProvider.Gemini]: "https://api.gemini.com",
+		[ServiceProvider.Gemini]: "https://generativelanguage.googleapis.com/v1beta",
 		[ServiceProvider.GoogleImage]: "https://api.googleimage.com",
 		[ServiceProvider.OpenRouter]: "https://openrouter.ai/api/v1/chat/completions",
 		[ServiceProvider.Google]: "https://generativelanguage.googleapis.com/v1beta",

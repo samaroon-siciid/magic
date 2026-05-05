@@ -1,0 +1,34 @@
+diff --git a/dist/src/const/aiModel.js b/dist/src/const/aiModel.js
+index e0bf8fb..7de2797 100644
+--- a/dist/src/const/aiModel.js
++++ b/dist/src/const/aiModel.js
+@@ -23,7 +23,7 @@ var e;
+     BigModel: "https://open.bigmodel.cn/api/paas/v4",
+     MiniMax: "https://api.minimaxi.com/v1",
+     SiliconFlow: "https://api.siliconflow.cn/v1",
+-    Gemini: "https://api.gemini.com",
++    Gemini: "https://generativelanguage.googleapis.com/v1beta",
+     "Google-Image": "https://api.googleimage.com",
+     OpenRouter: "https://openrouter.ai/api/v1/chat/completions",
+     Google: "https://generativelanguage.googleapis.com/v1beta"
+diff --git a/dist/src/pages/PlatformPackage/components/ConfigForm/index.js b/dist/src/pages/PlatformPackage/components/ConfigForm/index.js
+index 15c3408..7b906e8 100644
+--- a/dist/src/pages/PlatformPackage/components/ConfigForm/index.js
++++ b/dist/src/pages/PlatformPackage/components/ConfigForm/index.js
+@@ -26,6 +26,7 @@ const G = [
+       e.ServiceProvider.DeepSeek,
+       e.ServiceProvider.OpenAI,
+       e.ServiceProvider.Official,
++      e.ServiceProvider.Gemini,
+       e.ServiceProvider.DashScope,
+       e.ServiceProvider.OpenRouter,
+       e.ServiceProvider.Baidu,
+@@ -185,7 +186,7 @@ const G = [
+       label: `${l} API Key`,
+       description: `${r("apiKeyPlaceholder")} ${l} API Key`,
+       placeholder: `${K} API Key`,
+-      required: !u,
++      required: !u || g === p.AuthType.API_KEY,
+       inputType: "password",
+       shouldShow: !0
+     }), T.includes(t) && i.push({
