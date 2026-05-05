@@ -17,7 +17,7 @@ import { notifyAppTabChange } from "@/layouts/BaseLayoutMobile/components/Mobile
 // Lazy load tab pages (只加载一次)
 const WorkspacePage = lazy(() => import("@/pages/superMagicMobile/pages/ChatPage"))
 const ChatPage = lazy(() => import("@/pages/chatNew"))
-const MagiClawPage = lazy(() => import("@/pages/superMagic/pages/MagiClawPageOld"))
+const MagiClawPage = lazy(() => import("@/pages/superMagic/pages/MagiClawPage"))
 const ContactsPage = lazy(() => import("@/pages/contacts/lazy/Contacts"))
 const ProfilePage = lazy(() => import("@/pages/user/pages/my/lazy/Profile"))
 
