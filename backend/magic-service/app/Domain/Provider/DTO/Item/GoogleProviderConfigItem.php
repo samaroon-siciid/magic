@@ -133,7 +133,9 @@ class GoogleProviderConfigItem extends AbstractProviderConfigItem
     public function setAuthType(null|int|string $authType): void
     {
         if ($authType === null || $authType === '') {
-            $this->authType = self::AUTH_TYPE_SERVICE_ACCOUNT;
+            // Default to API Key mode so missing/empty auth_type does not
+            // accidentally promote an AI Studio configuration into Vertex.
+            $this->authType = self::AUTH_TYPE_API_KEY;
         } else {
             $this->authType = (string) $authType;
         }
@@ -389,6 +391,9 @@ class GoogleProviderConfigItem extends AbstractProviderConfigItem
             'auth_provider_x509_cert_url' => $this->authProviderX509CertUrl,
             'client_x509_cert_url' => $this->clientX509CertUrl,
             'universe_domain' => $this->universeDomain,
+            // Vertex AI region (e.g. global, us-central1). Forwarded to Odin
+            // so service-account requests can target the correct location.
+            'location' => $this->location,
         ];
     }
 
