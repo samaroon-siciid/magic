@@ -412,6 +412,7 @@
 			"marked": "15.0.12"
 		},
 		"patchedDependencies": {
+			"@dtyq/magic-admin": "patches/@dtyq__magic-admin.patch",
 			"pptxgenjs": "patches/pptxgenjs.patch",
 			"tiptap-markdown": "patches/tiptap-markdown.patch"
 		}

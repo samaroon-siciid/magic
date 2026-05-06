@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { memo, useMemo } from "react"
+import { memo, useEffect, useMemo } from "react"
 import { Flex, Form, Upload, message } from "antd"
 import { IconUpload } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
@@ -42,6 +42,7 @@ const providersByCategory = {
 			AiModel.ServiceProvider.DeepSeek,
 			AiModel.ServiceProvider.OpenAI,
 			AiModel.ServiceProvider.Official,
+			AiModel.ServiceProvider.Gemini,
 			AiModel.ServiceProvider.DashScope,
 			AiModel.ServiceProvider.OpenRouter,
 			AiModel.ServiceProvider.Baidu,
@@ -158,6 +159,33 @@ const ConfigForm = memo(({ category, code, name, descPosition = "left" }: Config
 		].includes(code as unknown as AiModel.ServiceProvider)
 	}, [code])
 
+	/* 谷歌 API Key 模式（Google AI Studio）需要 API Key 必填，避免隐藏字段导致校验绕过 */
+	const isGoogleApiKeyMode = useMemo(() => {
+		const effectiveAuthType = authType || AiManage.AuthType.API_KEY
+		return isGoogle && effectiveAuthType === AiManage.AuthType.API_KEY
+	}, [isGoogle, authType])
+
+	/* 切换认证方式后，清除上一种模式留下的校验错误，避免隐藏字段拦截提交 */
+	useEffect(() => {
+		if (!isGoogle) return
+		const effectiveAuthType = authType || AiManage.AuthType.API_KEY
+		if (effectiveAuthType === AiManage.AuthType.API_KEY) {
+			form.setFields(
+				serviceAccountFields
+					.filter((field) => field !== "api_key" && field !== "url")
+					.map((field) => ({
+						name: ["config", field],
+						errors: [],
+					})),
+			)
+		} else if (effectiveAuthType === AiManage.AuthType.SERVICE_ACCOUNT) {
+			form.setFields([
+				{ name: ["config", "api_key"], errors: [] },
+				{ name: ["config", "url"], errors: [] },
+			])
+		}
+	}, [authType, form, isGoogle])
+
 	const options = useMemo(() => {
 		return [
 			{
@@ -244,7 +272,8 @@ const ConfigForm = memo(({ category, code, name, descPosition = "left" }: Config
 				label: `${innerName} API Key`,
 				description: `${t("apiKeyPlaceholder")} ${innerName} API Key`,
 				placeholder: `${name} API Key`,
-				required: !isGoogle,
+				/* 非 Google 服务商始终必填；Google 走 Google AI Studio (api_key) 模式时必填 */
+				required: !isGoogle || isGoogleApiKeyMode,
 				inputType: "password",
 				shouldShow: true,
 			})
@@ -329,6 +358,7 @@ const ConfigForm = memo(({ category, code, name, descPosition = "left" }: Config
 		return configs
 	}, [
 		isGoogle,
+		isGoogleApiKeyMode,
 		authType,
 		useApiKey,
 		code,
